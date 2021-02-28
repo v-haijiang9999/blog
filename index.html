@@ -159,6 +159,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/28/%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84SSH/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="闫海江">
+      <meta itemprop="description" content="web前端 java android ios 宅">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="五五">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/28/%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84SSH/" class="post-title-link" itemprop="url">生成新的SSH</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-28 22:17:57 / Modified: 22:25:57" itemprop="dateCreated datePublished" datetime="2021-02-28T22:17:57+08:00">2021-02-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>地址：<a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent</a><br>1、Open Terminal.<br>2、Paste the text below, substituting in your GitHub email address.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t ed25519 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Note: If you are using a legacy system that doesn’t support the Ed25519 algorithm, use:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure></li>
+<li>This creates a new ssh key, using the provided email as a label.<br>Generating public/private ed25519 key pair.<br>3、When you’re prompted to “Enter a file in which to save the key,” press Enter. This accepts the default file location.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter a file in which to save the key (&#x2F;Users&#x2F;you&#x2F;.ssh&#x2F;id_ed25519): [Press enter]</span><br></pre></td></tr></table></figure>
+4、At the prompt, type a secure passphrase. For more information, see “Working with SSH key passphrases”.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase): [Type a passphrase]</span><br><span class="line">Enter same passphrase again: [Type passphrase again]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/28/202102/Http%E5%8D%8F%E8%AE%AE%E3%80%81http1.1%E3%80%81http2%E3%80%81https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -792,7 +858,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-28 16:59:22" itemprop="dateModified" datetime="2021-02-28T16:59:22+08:00">2021-02-28</time>
+                <time title="Modified: 2021-02-28 22:21:11" itemprop="dateModified" datetime="2021-02-28T22:21:11+08:00">2021-02-28</time>
               </span>
 
           
@@ -904,7 +970,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
