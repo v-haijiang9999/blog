@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="[http:&#x2F;&#x2F;www.ptbird.cn&#x2F;http-http1-1-http2-https.html]整理 一、http协议地址：http:&#x2F;&#x2F;www.cnblogs.com&#x2F;ranyonsue&#x2F;p&#x2F;5984001.html文章内容：1.HTTP简介2.主要特点3.HTTP之URL4.URI和URL的区别5.HTTP之请求消息Request6.HTTP之响应消息Response7.HTTP之状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http协议、http1.1、http2、https">
+<meta property="og:url" content="http://example.com/2021/02/28/202102/Http%E5%8D%8F%E8%AE%AE%E3%80%81http1.1%E3%80%81http2%E3%80%81https/index.html">
+<meta property="og:site_name" content="五五">
+<meta property="og:description" content="[http:&#x2F;&#x2F;www.ptbird.cn&#x2F;http-http1-1-http2-https.html]整理 一、http协议地址：http:&#x2F;&#x2F;www.cnblogs.com&#x2F;ranyonsue&#x2F;p&#x2F;5984001.html文章内容：1.HTTP简介2.主要特点3.HTTP之URL4.URI和URL的区别5.HTTP之请求消息Request6.HTTP之响应消息Response7.HTTP之状态">
+<meta property="og:locale">
+<meta property="og:image" content="http://www.ptbird.cn/usr/uploads/2017/08/1599163816.png">
+<meta property="article:published_time" content="2021-02-28T11:39:23.000Z">
+<meta property="article:modified_time" content="2021-02-28T11:51:16.169Z">
+<meta property="article:author" content="闫海江">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.ptbird.cn/usr/uploads/2017/08/1599163816.png">
+
+<link rel="canonical" href="http://example.com/2021/02/28/202102/Http%E5%8D%8F%E8%AE%AE%E3%80%81http1.1%E3%80%81http2%E3%80%81https/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Http协议、http1.1、http2、https | 五五</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="五五" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">五五</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/28/202102/Http%E5%8D%8F%E8%AE%AE%E3%80%81http1.1%E3%80%81http2%E3%80%81https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="闫海江">
+      <meta itemprop="description" content="web前端 java android ios 宅">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="五五">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Http协议、http1.1、http2、https
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-28 19:39:23 / Modified: 19:51:16" itemprop="dateCreated datePublished" datetime="2021-02-28T19:39:23+08:00">2021-02-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[<a target="_blank" rel="noopener" href="http://www.ptbird.cn/http-http1-1-http2-https.html]%E6%95%B4%E7%90%86">http://www.ptbird.cn/http-http1-1-http2-https.html]整理</a></p>
+<h3 id="一、http协议"><a href="#一、http协议" class="headerlink" title="一、http协议"></a>一、http协议</h3><p>地址：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/ranyonsue/p/5984001.html">http://www.cnblogs.com/ranyonsue/p/5984001.html</a><br><strong>文章内容：</strong><br>1.HTTP简介<br>2.主要特点<br>3.HTTP之URL<br>4.URI和URL的区别<br>5.HTTP之请求消息Request<br>6.HTTP之响应消息Response<br>7.HTTP之状态码<br>8.HTTP请求方法<br>9.HTTP工作原理<br>10.GET和POST请求的区别</p>
+<h3 id="二、http头字段"><a href="#二、http头字段" class="headerlink" title="二、http头字段"></a>二、http头字段</h3><p>地址: <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/6e86903d74f7">http://www.jianshu.com/p/6e86903d74f7</a><br><strong>内容：</strong><br>http头字段列表</p>
+<h3 id="三、http2-（包括与http1-1的比较）"><a href="#三、http2-（包括与http1-1的比较）" class="headerlink" title="三、http2 （包括与http1.1的比较）"></a>三、http2 （包括与http1.1的比较）</h3><p>地址：<a target="_blank" rel="noopener" href="https://www.qcloud.com/community/article/541321">https://www.qcloud.com/community/article/541321</a><br><strong>内容：</strong><br>一、多路复用的单一长连接<br>二、头部压缩和二进制格式<br>三、服务端推送Server Push</p>
+<h3 id="四、《http2讲解》-gitbook翻译"><a href="#四、《http2讲解》-gitbook翻译" class="headerlink" title="四、《http2讲解》 gitbook翻译"></a>四、《http2讲解》 gitbook翻译</h3><p>地址： <a target="_blank" rel="noopener" href="https://ye11ow.gitbooks.io/http2-explained/content/">https://ye11ow.gitbooks.io/http2-explained/content/</a><br><strong>内容：</strong><br>有比较详细的对http2的介绍，但是翻译的质量很一般，不是特别建议。<br>上面http2 腾讯云上的文章已经足够了解http2了</p>
+<h3 id="四、https的内容"><a href="#四、https的内容" class="headerlink" title="四、https的内容"></a>四、https的内容</h3><p>地址：：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhuqil/archive/2012/07/23/2604572.html">http://www.cnblogs.com/zhuqil/archive/2012/07/23/2604572.html</a><br><strong>内容</strong></p>
+<ul>
+<li>HTTPS简介<br>客户端发起HTTPS请求<br>服务端的配置<br>传送证书<br>客户端解析证书<br>传送加密信息<br>服务段解密信息<br>传输加密后的信息<br>客户端解密信息<h3 id="五、http2-图"><a href="#五、http2-图" class="headerlink" title="五、http2 图"></a>五、http2 图</h3><img src="http://www.ptbird.cn/usr/uploads/2017/08/1599163816.png" alt="RUNOOB 图标"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/http/" rel="tag"># http</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/28/202102/Http%20%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5/" rel="prev" title="Http 缓存更新策略：强制缓存与协商缓存">
+      <i class="fa fa-chevron-left"></i> Http 缓存更新策略：强制缓存与协商缓存
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81http%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">一、http协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81http%E5%A4%B4%E5%AD%97%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">二、http头字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81http2-%EF%BC%88%E5%8C%85%E6%8B%AC%E4%B8%8Ehttp1-1%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、http2 （包括与http1.1的比较）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E3%80%8Ahttp2%E8%AE%B2%E8%A7%A3%E3%80%8B-gitbook%E7%BF%BB%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">四、《http2讲解》 gitbook翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81https%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">5.</span> <span class="nav-text">四、https的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81http2-%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">五、http2 图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">闫海江</p>
+  <div class="site-description" itemprop="description">web前端 java android ios 宅</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://zhoulingyu.com/" title="http:&#x2F;&#x2F;zhoulingyu.com&#x2F;" rel="noopener" target="_blank">周小鱼</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">闫海江</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
